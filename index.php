@@ -1,4 +1,13 @@
 <?php
+/**
+ * @author Michael Britt
+ * @version 2.0
+ * Date:4/3/2019
+ * URL: index.php
+ * A page used to gather a cupcake order and display confirmation to the user on submission.
+ */
+
+
 //array of flavors
 $cupcake_flavors = array("grasshopper"=>"The Grasshopper", "maple"=>"Whiskey Maple Bacon",
     "Carrot"=>"Carrot Walnut", "Caramel"=>"Salted Caramel Cupcake",  "Velvet"=>"Red Velvet",  "lemon"=>"Lemon Drop",
@@ -24,8 +33,13 @@ function checkErrors($data)
     return true;
 }
 
+/**
+ * Creates confimation information for this page
+ * @param $data - cupcakes picked
+ */
 function createSummary($data)
 {
+    //multiplies number of cupcakes by 3.50 and formats the answer to 2 decimal points.
     $total = number_format(count($data)* 3.50, 2, '.', '');
     echo '<p>Order Summary</p>';
     echo '<ul>';
@@ -37,7 +51,7 @@ function createSummary($data)
     echo "<p> Order Total: $". $total;
 }
 
-
+//if form submission
 if($submitted)
 {
 
