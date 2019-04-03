@@ -90,7 +90,32 @@ if($submitted)
     <title>Document</title>
 </head>
 <body>
+<?php
+if($submitted)
+{
+//if errors have no messages display confirmation modal
+    if(checkErrors($errors))
+    {
+        $thanks = "<p>Thank you, " . $name . ", for your Order!</p>";
+        echo
+        '<div id ="modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+          aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content"">';
+        echo $thanks;
+        createSummary($checked_flavors);
 
+        echo
+               '<div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>';
+    }
+}
+
+?>
 
 <h1>Cupcake Fundraiser</h1>
 
