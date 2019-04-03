@@ -90,69 +90,70 @@ if($submitted)
     <title>Document</title>
 </head>
 <body>
-<?php
-if($submitted)
-{
-//if errors have no messages display confirmation modal
-    if(checkErrors($errors))
+<div id="margins">
+    <?php
+    if($submitted)
     {
-        $thanks = "<p>Thank you, " . $name . ", for your Order!</p>";
-        echo
-        '<div id ="modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
-          aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content"">';
-        echo $thanks;
-        createSummary($checked_flavors);
+    //if errors have no messages display confirmation modal
+        if(checkErrors($errors))
+        {
+            $thanks = "<p>Thank you, " . $name . ", for your Order!</p>";
+            echo
+            '<div id ="modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+              aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content"">';
+            echo $thanks;
+            createSummary($checked_flavors);
 
-        echo
-               '<div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            echo
+                   '<div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>';
-    }
-}
-
-?>
-
-<h1>Cupcake Fundraiser</h1>
-
-<form action="index.php" method="post">
-    <div class="form-group">
-        <label for="name">Your Name:</label>
-        <input type="text" class="form-control col-md-6" id="name" placeholder="Please input your name."
-               name="full_name" value=<?php if (isset($_POST['full_name'])) echo $_POST['full_name']; ?>>
-
-    </div>
-    <?php
-    if(!empty($errors['nameErr'])) echo "<p class=\"btn btn-outline-danger\">" . $errors['nameErr'] . "</p><br>";
-    ?>
-    <label for="cupcakes">Cupcake Flavors</label>
-    <?php
-    foreach($cupcake_flavors as $flavor => $flavor_string)
-    {
-        echo "<div class='form-check'>
-            <input class='form-check-input' type='checkbox' value=$flavor id='defaultCheck1' name='cupcakes[]' ";
-        //if check that one item was checked if so check each item to find out if it has been selected
-        //then keep checked those items checked on post
-        if($checked_flavors!=null)
-        {
-            if (in_array($flavor, $checked_flavors, true)) echo 'checked';
+        </div>';
         }
-        echo ">
-            <label class='form-check-label' for='defaultCheck1'>
-                $flavor_string
-            </label>
-        </div>";
     }
-    ?>
-    <?php if(!empty($errors['checkErr'])) echo "<p class=\"btn btn-outline-danger\">" . $errors['checkErr'] . "</p><br>";
-    ?>
-    <button type="submit" class="btn btn-success">Order</button>
-</form>
 
+    ?>
+
+    <h1>Cupcake Fundraiser</h1>
+
+    <form action="index.php" method="post">
+        <div class="form-group">
+            <label for="name">Your Name:</label>
+            <input type="text" class="form-control col-md-6" id="name" placeholder="Please input your name."
+                   name="full_name" value=<?php if (isset($_POST['full_name'])) echo $_POST['full_name']; ?>>
+
+        </div>
+        <?php
+        if(!empty($errors['nameErr'])) echo "<p class=\"btn btn-outline-danger\">" . $errors['nameErr'] . "</p><br>";
+        ?>
+        <label for="cupcakes">Cupcake Flavors</label>
+        <?php
+        foreach($cupcake_flavors as $flavor => $flavor_string)
+        {
+            echo "<div class='form-check'>
+                <input class='form-check-input' type='checkbox' value=$flavor id='defaultCheck1' name='cupcakes[]' ";
+            //if check that one item was checked if so check each item to find out if it has been selected
+            //then keep checked those items checked on post
+            if($checked_flavors!=null)
+            {
+                if (in_array($flavor, $checked_flavors, true)) echo 'checked';
+            }
+            echo ">
+                <label class='form-check-label' for='defaultCheck1'>
+                    $flavor_string
+                </label>
+            </div>";
+        }
+        ?>
+        <?php if(!empty($errors['checkErr'])) echo "<p class=\"btn btn-outline-danger\">" . $errors['checkErr'] . "</p><br>";
+        ?>
+        <button type="submit" class="btn btn-success">Order</button>
+    </form>
+</div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
